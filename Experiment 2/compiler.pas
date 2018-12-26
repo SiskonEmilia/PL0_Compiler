@@ -477,10 +477,12 @@ Begin {statement}
                     end
                   else with table[i] do gen(red,lev-level,adr)
                 end
+              else error(4);
+              getsym;
             Until sym <> comma
           else error(40);
           if sym <> rparen then error(22);
-          getsym;
+          getsym
         End
     Else
       If sym = wrtsym Then
@@ -736,10 +738,10 @@ Begin  {主程序}
   word[6] := 'if        ';
   word[7] := 'odd       ';
   word[8] := 'procedure ';
-  word[9] := 'then      ';
-  word[10] := 'var       ';
-  word[11] := 'while     ';
-  word[12] := 'read      ';
+  word[9] := 'read      ';
+  word[10] := 'then      ';
+  word[11] := 'var       ';
+  word[12] := 'while     ';
   word[13] := 'write     ';
 
   wsym[1] := beginsym;
@@ -750,10 +752,10 @@ Begin  {主程序}
   wsym[6] := ifsym;
   wsym[7] := oddsym;
   wsym[8] := procsym;
-  wsym[9] := thensym;
-  wsym[10] := varsym;
-  wsym[11] := whilesym;
-  wsym[12] := redsym;
+  wsym[9] := redsym;
+  wsym[10] := thensym;
+  wsym[11] := varsym;
+  wsym[12] := whilesym;
   wsym[13] := wrtsym;
 
   ssym['+'] := plus;

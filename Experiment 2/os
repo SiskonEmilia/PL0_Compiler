@@ -4,73 +4,46 @@
     2 begin
     3   a := x;  b := y;  z := 0;
     9   while b > 0 do
-****       ↑11
-****         ↑13
-****           ↑23
-   10   begin  
-****       ↑10
-   10     if odd b then z := z + a;
-   17     a := 2*a ;  b := b/2 ;
-   25   end
-   25 end;
-   26 procedure  divide;
-   26 var  w;
-   27 begin  
-   28   r := x;  q := 0;  w := y;
-   34   while w % r do w := 2*w ;
-****       ↑11
-****         ↑13
-****           ↑23
-   37   while w > y do
-****       ↑11
-****         ↑13
-****           ↑23
-   38   begin
-****       ↑10
-   38     q := 2*q;
-   42     w := w/2;
-   46     if w % r then
-   49     begin
-   50       r := r-w;
-   54       q := q+1;
-   58     end
-   58   end
-   58 end;
-   59 procedure  gcd;
-   59 var  f, g ;
-   60 begin
-   61   f := x;  g := y;
-   65   while f & g do
-****       ↑11
-****         ↑13
-****           ↑23
-   66   begin
-****       ↑10
-   66     if f < g then g := g-f;
-   74     if g < f then f := f-g;
-   82   end;
-   82   z := f
-   83 end;
-   85 begin 
-   86     read(x); read(y);
-****        ↑11
-****         ↑13
-****                 ↑11
-****                  ↑13
-   88     call multiply;
-   89     write(x, y, z);
-   95     read(x); read(y);
-****        ↑11
-****         ↑13
-****                 ↑11
-****                  ↑13
-   97     call divide;
-   98     write(x, y, z);
+   13   begin  
+   13     if odd b then z := z + a;
+   20     a := 2*a ;  b := b/2 ;
+   28   end
+   28 end;
+   30 procedure  divide;
+   30 var  w;
+   31 begin  
+   32   r := x;  q := 0;  w := y;
+   38   while w % r do w := 2*w ;
+   47   while w > y do
+   51   begin
+   51     q := 2*q;
+   55     w := w/2;
+   59     if w % r then
+   62     begin
+   63       r := r-w;
+   67       q := q+1;
+   71     end
+   71   end
+   71 end;
+   73 procedure  gcd;
+   73 var  f, g ;
+   74 begin
+   75   f := x;  g := y;
+   79   while f & g do
+   83   begin
+   83     if f < g then g := g-f;
+   91     if g < f then f := f-g;
+   99   end;
+  100   z := f
+  101 end;
+  103 begin 
   104     read(x); read(y);
-****        ↑11
-****         ↑13
-****                 ↑11
-****                  ↑13
-  106     call gcd;
+  106     call multiply;
   107     write(x, y, z);
-  113 end.
+  113     read(x); read(y);
+  115     call divide;
+  116     write(x, y, z);
+  122     read(x); read(y);
+  124     call gcd;
+  125     write(x, y, z);
+  131 end.
