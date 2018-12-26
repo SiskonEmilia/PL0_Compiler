@@ -1,0 +1,4 @@
+{
+  "pascal.formatter.engine": "ptop",
+  "pascal.formatter.enginePath": "/usr/local/bin/ptop"
+}
