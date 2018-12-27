@@ -42,7 +42,7 @@
   107     write(x, y, z);
   113     read(x); read(y);
   115     call divide;
-  116     write(x, y, z);
+  116     write(x, y, q);
   122     read(x); read(y);
   124     call gcd;
   125     write(x, y, z);

@@ -42,7 +42,7 @@ begin
     write(x, y, z);
     read(x); read(y);
     call divide;
-    write(x, y, z);
+    write(x, y, q);
     read(x); read(y);
     call gcd;
     write(x, y, z);

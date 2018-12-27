@@ -1,0 +1,21 @@
+Type in the path to your source code: 
+Type in path of the file to output source program at
+Type in path of the file to output intermediate program at
+Type in path of the file to output runtime data at
+START PL/0
+Running program ask for input: 
+Running program ask for input: 
+7
+85
+595
+Running program ask for input: 
+Running program ask for input: 
+25
+3
+8
+Running program ask for input: 
+Running program ask for input: 
+84
+36
+12
+END PL/0

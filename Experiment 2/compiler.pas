@@ -1,4 +1,3 @@
-
 Program  PL0 ;
 {带有代码生成的PL0编译程序}
 
@@ -15,7 +14,8 @@ Type
   symbol = (nul, ident, number, plus, minus, times, slash, oddsym,
             eql, neq, lss, leq, gtr, geq, lparen, rparen, comma, semicolon,
             period, becomes, beginsym, endsym, ifsym, thensym,
-            whilesym, dosym, callsym, constsym, varsym, procsym, redsym, wrtsym);
+            whilesym, dosym, callsym, constsym, varsym, procsym, redsym, wrtsym)
+  ;
   alfa = packed array [1..al] Of char;
   m_object = (constant, variable, m_procedure);
   symset = set Of symbol;
@@ -25,8 +25,6 @@ Type
     l : 0..levmax; {相对层数}
     a : 0..amax; {相对地址}
   End;
-
-
 
 {LIT 0,a : 取常数a
   OPR 0,a : 执行运算a
@@ -459,48 +457,50 @@ Begin {statement}
         gen(jmp, 0, cx1);
         code[cx2].a := cx
       End
-    Else
-      If sym = redsym Then
-        Begin
-          getsym;
-          if sym = lparen Then
+  Else
+    If sym = redsym Then
+      Begin
+        getsym;
+        If sym = lparen Then
+          Repeat
+            getsym;
+            If sym = ident Then
+              Begin
+                i := position(id);
+                If i = 0 Then error(11)
+                Else If table[i].kind <> variable Then
+                       Begin
+                         error(12);
+                         i := 0
+                       End
+                Else With table[i] Do
+                       gen(red,lev-level,adr)
+              End
+            Else error(4);
+            getsym;
+          Until sym <> comma
+        Else error(40);
+        If sym <> rparen Then error(22);
+        getsym
+      End
+  Else
+    If sym = wrtsym Then
+      Begin
+        getsym;
+        If sym = lparen
+          Then
+          Begin
             Repeat
               getsym;
-              if sym = ident then
-                begin
-                  i := position(id);
-                  if i = 0 Then error(11)
-                  else if table[i].kind <> variable then
-                    begin
-                      error(12);
-                      i := 0
-                    end
-                  else with table[i] do gen(red,lev-level,adr)
-                end
-              else error(4);
-              getsym;
-            Until sym <> comma
-          else error(40);
-          if sym <> rparen then error(22);
-          getsym
-        End
-    Else
-      If sym = wrtsym Then
-        Begin
-          getsym;
-          if sym = lparen
-          then begin
-              repeat
-                getsym;
-                expression([rparen,comma]+fsys);
-                gen(wrt,0,0);
-              until sym <> comma;
-              if sym <> rparen
-              then error(22);
-              getsym
-              end
-          else error(40)
-        End;
+              expression([rparen,comma]+fsys);
+              gen(wrt,0,0);
+            Until sym <> comma;
+            If sym <> rparen
+              Then error(22);
+            getsym
+          End
+        Else error(40)
+      End;
   test(fsys, [ ], 19)
 End {statement};
 Begin {block}
